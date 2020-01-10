@@ -19,3 +19,10 @@ Route::get('/', function () {
 })->middleware('verified');
 
 Auth::routes(['verify' => true]);
+// auth 中间件代表需要登录，verified中间件代表需要经过邮箱验证
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    //获取地址详情
+    Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
+    //新建地址
+    Route::get('user_addresses/create', 'UserAddressesController@create')->name('user_addresses.create');
+});
