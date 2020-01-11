@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserAddressRequest;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserAddressRequest;
 
 /**
  * 地址操作类
- * 
+ *
  */
 class UserAddressesController extends Controller
 {
