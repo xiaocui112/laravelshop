@@ -58,6 +58,7 @@ class UserAddressesController extends Controller
      */
     public function edit(UserAddress $userAddress)
     {
+        $this->authorize('own', $userAddress);
         return view('user_addresses.create_and_edit', ['address' => $userAddress]);
     }
     /**
@@ -69,6 +70,7 @@ class UserAddressesController extends Controller
      */
     public function update(UserAddress $userAddress, UserAddressRequest $request)
     {
+        $this->authorize('own', $userAddress);
         $userAddress->update($request->only([
             'province',
             'city',
@@ -89,8 +91,9 @@ class UserAddressesController extends Controller
      */
     public function destroy(UserAddress $user_address)
     {
+        $this->authorize('own', $user_address);
         $user_address->delete();
 
-        return redirect()->route('user_addresses.index');
+        return [];
     }
 }

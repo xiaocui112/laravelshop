@@ -30,7 +30,7 @@
                         <form class="form-horizontal" role="form" action="{{ route('user_addresses.store') }}"
                             method="post">
                             @endif
-                            class="form-horizontal">
+
                             @csrf
                             <select-district
                                 :init-value="{{ json_encode([old('province', $address->province), old('city', $address->city), old('district', $address->district)]) }}"
