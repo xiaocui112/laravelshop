@@ -27,11 +27,11 @@ class ProductsController extends AdminController
         $grid = new Grid(new Product());
 
         $grid->column('id', __('Id'));
-        $grid->column('title','商品名称');
+        $grid->column('title', '商品名称');
         // $grid->column('description', __('Description'));
         // $grid->column('image', __('Image'));
-        $grid->column('on_sale','是否上架')->display(function($value){
-            return $value?'是':'否';
+        $grid->column('on_sale', '是否上架')->display(function ($value) {
+            return $value ? '是' : '否';
         });
         $grid->column('rating', '评分');
         $grid->column('sold_count', '销量');
@@ -39,9 +39,9 @@ class ProductsController extends AdminController
         $grid->column('price', '价格');
         $grid->column('created_at', '添加时间');
         $grid->column('updated_at', '修改时间');
-        $grid->actions(function($actions){
+        $grid->actions(function ($actions) {
             $actions->disableView();
-            $actions->disabelDelete();
+            $actions->disableDelete();
         });
         $grid->disableBatchActions();
 
@@ -82,15 +82,28 @@ class ProductsController extends AdminController
     {
         $form = new Form(new Product());
 
-        $form->text('title', __('Title'));
-        $form->textarea('description', __('Description'));
-        $form->image('image', __('Image'));
-        $form->switch('on_sale', __('On sale'))->default(1);
-        $form->decimal('rating', __('Rating'))->default(5.00);
-        $form->number('sold_count', __('Sold count'));
-        $form->number('review_count', __('Review count'));
-        $form->decimal('price', __('Price'));
+        $form->text('title', '商品名称')->rules('required');
+        $form->quill('description', '商品描述')->rules('required');
+        $form->image('image', '封面图片')->rules('required|image');
+        $form->switch('on_sale', '是否上线')->options(['1' => '是', '0' => '否'])->default(0);
+        // $form->decimal('rating', __('Rating'))->default(5.00);
+        // $form->number('sold_count', __('Sold count'));
+        // $form->number('review_count', __('Review count'));
+        // $form->decimal('price', __('Price'));
+        $form->hasMany('skus', 'sku 列表', function (Form\NestedForm $form) {
+            $form->text('title', 'sku 名称')->rules('required');
+            $form->text('description', 'sku 描述')->rules('required');
+            $form->decimal('price', '单价')->rules('required|numeric|min:0.01');
+            $form->number('stock', '库存')->rules('required|integer|min:0');
+        });
+        $form->saving(function (Form $form) {
+            $form->model()->price = collect($form->input('skus'))->where(Form::REMOVE_FLAG_NAME, 0)->min('price') ?? 0;
+        });
 
         return $form;
+    }
+    public function store()
+    {
+        return $this->form()->store();
     }
 }
