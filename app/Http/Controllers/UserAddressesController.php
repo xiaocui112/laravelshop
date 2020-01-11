@@ -50,4 +50,47 @@ class UserAddressesController extends Controller
         ]));
         return redirect()->route('user_addresses.index');
     }
+    /**
+     * 修改收货地址
+     *
+     * @param UserAddress $userAddress
+     * @return Illminate\View\View
+     */
+    public function edit(UserAddress $userAddress)
+    {
+        return view('user_addresses.create_and_edit', ['address' => $userAddress]);
+    }
+    /**
+     * 修改地址
+     *
+     * @param UserAddress $userAddress
+     * @param UserAddressRequest $request
+     * @return Illminate\View\View
+     */
+    public function update(UserAddress $userAddress, UserAddressRequest $request)
+    {
+        $userAddress->update($request->only([
+            'province',
+            'city',
+            'district',
+            'address',
+            'zip',
+            'contact_name',
+            'contact_phone',
+        ]));
+
+        return redirect()->route('user_addresses.index');
+    }
+    /**
+     * 删除地址
+     *
+     * @param UserAddress $user_address
+     * @return Illminate\View\View
+     */
+    public function destroy(UserAddress $user_address)
+    {
+        $user_address->delete();
+
+        return redirect()->route('user_addresses.index');
+    }
 }
