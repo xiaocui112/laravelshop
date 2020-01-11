@@ -29,11 +29,14 @@ class UsersController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
         $grid->column('email', "邮箱");
-        $grid->column('email_verified_at', __('Email verified at'));
-        $grid->column('password', __('Password'));
-        $grid->column('remember_token', __('Remember token'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('email_verified_at',"是否验证邮箱")->display(function($value){
+            return $value?'是':'否';
+        });
+        $grid->column('remember_token','是否记住令牌')->display(function($value){
+            return $value?'是':'否';
+        });
+        $grid->column('created_at', '创建时间');
+        $grid->column('updated_at', '修改时间');
         $grid->disableCreateButton();
         $grid->disableActions();
         $grid->disableBatchActions();
