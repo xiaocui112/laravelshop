@@ -11480,4 +11480,10 @@ body {
 
 .footer .container p {
   margin: 19px 0;
-  color:
+  color: #c1c1c1;
+}
+
+.footer .container p a {
+  color: inherit;
+}
+

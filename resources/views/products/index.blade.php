@@ -6,7 +6,7 @@
     <div class="col-lg-10 offset-lg-1">
         <div class="card">
             <div class="card-body">
-                <div class="row products-list">
+                <div class="row products-list flex-fill">
                     @foreach($products as $product)
                     <div class="col-3 product-item">
                         <div class="product-content">
