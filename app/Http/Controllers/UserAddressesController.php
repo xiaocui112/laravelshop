@@ -54,7 +54,7 @@ class UserAddressesController extends Controller
      * 修改收货地址
      *
      * @param UserAddress $userAddress
-     * @return Illminate\View\View
+     * @return Illuminate\View\View
      */
     public function edit(UserAddress $userAddress)
     {
@@ -66,7 +66,7 @@ class UserAddressesController extends Controller
      *
      * @param UserAddress $userAddress
      * @param UserAddressRequest $request
-     * @return Illminate\View\View
+     * @return Illuminate\View\View
      */
     public function update(UserAddress $userAddress, UserAddressRequest $request)
     {
@@ -87,7 +87,7 @@ class UserAddressesController extends Controller
      * 删除地址
      *
      * @param UserAddress $user_address
-     * @return Illminate\View\View
+     * @return Illuminate\View\View
      */
     public function destroy(UserAddress $user_address)
     {
