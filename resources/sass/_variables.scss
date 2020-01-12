@@ -18,6 +18,11 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 .products-index-page {
+   .search-form {
+    padding: 0 5px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
     .pagination {
     margin-right: 5px;
   }
