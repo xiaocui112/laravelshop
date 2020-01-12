@@ -41,4 +41,18 @@ class ProductsController extends Controller
             ]
         ]);
     }
+    /**
+     * 详情
+     *
+     * @param Product $product
+     * @param Request $request
+     * @return Illminate\View\View
+     */
+    public function show(Product $product, Request $request)
+    {
+        if (!$product->on_sale) {
+            throw new \Exception('商品没有上架');
+        }
+        return view('products.show', ['product' => $product]);
+    }
 }
